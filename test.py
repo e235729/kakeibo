@@ -1,2 +1,1 @@
-print("helloはこんにちは")
-aaaaa
+git test
