@@ -9,7 +9,7 @@ def index():
 
 @app.route('/new_income')#そのhtmlに飛ぶコード
 def register():
-    return render_template('register.html')
+    return render_template('new_income.html')
 
 @app.route('/submit_registration', methods=['POST'])#フォームを出すコード
 def submit_registration():
