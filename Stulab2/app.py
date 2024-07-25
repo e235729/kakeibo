@@ -11,6 +11,7 @@ def index():
 def register():
     return render_template('new_income.html')
 
+
 @app.route('/submit_registration', methods=['POST'])#フォームを出すコード
 def submit_registration():
     # フォームからのデータを取得
