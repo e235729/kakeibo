@@ -1,13 +1,37 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Homepage</title>
+    <title>家計簿アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1 class="top">一言多い家計簿アプリ</h1>
-
-    <a href="/register"><button>新規登録ボタン</button></a>
-    </form>
+    <div class="container">
+        <div class="header">
+            <h1>家計簿アプリ</h1>
+        </div>
+        <div class="message">
+            <p>収支状況によってメッセージを表示</p>
+        </div>
+        <div class="main-content">
+            <div class="income">
+                <h2>収入</h2>
+                <!-- 収入項目をここに表示 -->
+            </div>
+            <div class="expense">
+                <h2>支出</h2>
+                <!-- 支出項目をここに表示 -->
+            </div>
+        </div>
+        <div class="buttons">
+            <a href="/new_income"><button>新規収入登録</button></a>
+            <a href="/new_expense"><button>新規支出登録</button></a>
+        </div>
+        <div class="memo">
+            <h2>メモ</h2>
+            <!-- メモをここに表示 -->
+        </div>
+    </div>
 </body>
 </html>
