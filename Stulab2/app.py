@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -8,9 +8,12 @@ def index():
 
 
 @app.route('/new_income')#そのhtmlに飛ぶコード
-def register():
+def income(): #incomeに変更
     return render_template('new_income.html')
 
+@app.route('/new_expense')#そのhtmlに飛ぶコード
+def expense(): 
+    return render_template('new_expense.html')
 
 @app.route('/submit_registration', methods=['POST'])#フォームを出すコード
 def submit_registration():
