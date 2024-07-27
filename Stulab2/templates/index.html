@@ -16,16 +16,16 @@
                 <section class="balance">
                     <div class="income">
                         <h2>収入</h2>
-                        <p id="incomeAmount">0 円</p>
+                        <p id="incomeAmount">0 円</p>  <!-- 実際はデータベースから引っ張って収入入れる -->
                     </div>
                     <div class="expense">
                         <h2>支出</h2>
-                        <p id="expenseAmount">0 円</p>
+                        <p id="expenseAmount">0 円</p> <!-- ここもうえと一緒 -->
                     </div>
                 </section>
                 <section class="controls">
-                    <a href='/new_income'><button class="btn" id="newIncomeBtn">新規収入登録</button>
-                    <a href='/new_expense'><button class="btn" id="newExpenseBtn">新規支出登録</button>
+                    <a href='/new_income'><button class="btn" id="newIncomeBtn">新規収入登録</button></a>
+                    <a href='/new_expense'><button class="btn" id="newExpenseBtn">新規支出登録</button></a>
                 </section>
                 <section class="inputForm" id="inputForm" style="display:none;">
                     <label for="amount">金額:</label>
@@ -36,13 +36,13 @@
             <div class="right-panel">
                 <section class="message">
                     <h2>メッセージ</h2>
-                    <p>なんで貯金できないのか明日までに考えていてください。そしたら何かが見えてくるはずです。</p>
+                    <p>なんで貯金できないのか明日までに考えていてください。そしたら何かが見えてくるはずです。</p> <!-- 条件分岐でコメント表示 -->
                 </section>
                 <section class="memo">
                     <h2>メモ</h2>
-                    <button class="btn" id="newMemo">新規メモ</button>
+                    <a href='/new_memo'><button class="btn" id="newMemo">新規メモ</button></a>
                     <div class="memo-entry">
-                        <p>xx月xx日 旅行お土産代で使った</p>
+                        <p>xx月xx日 旅行お土産代で使った</p> <!-- メモの内容を引っ張る -->
                         <button class="btn delete">削除</button>
                         <button class="btn edit">編集</button>
                     </div>
