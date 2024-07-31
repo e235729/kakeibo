@@ -145,27 +145,27 @@
             </div>
             <div class="right-panel">
                 <div class="message">
-                    <h2>メッセージ</h2>
+                    <h2>一言多いメッセージ</h2>
                     <p>{{ message }}</p>
                 </div>
                 <div class="memo">
                     <h2>メモ</h2>
                     <!-- メモの表示 -->
-                    {% for entry in expenses %}
+                    {% for entry in expenses[-3:] %}
                     <div class="memo-entry">
                         <p>{{ entry.date }} 支出: {{ entry.amount }} 円 - {{ entry.memo }}</p>
-                        <a href="{{ url_for('edit_expense', id=entry.id) }}"><button class="btn edit">編集</button></a>
+                        <a href="{{ url_for('edit_expense', id=entry.id) }}"><button class="btn">編集</button></a>
                         <form action="{{ url_for('delete_expense', id=entry.id) }}" method="post" style="display:inline;">
-                            <button class="btn delete" type="submit">削除</button>
+                            <button class="btn" type="submit">削除</button>
                         </form>
                     </div>
                     {% endfor %}
-                    {% for entry in incomes %}
+                    {% for entry in incomes[-3:] %}
                     <div class="memo-entry">
                         <p>{{ entry.date }} 収入: {{ entry.amount }} 円 - {{ entry.memo }}</p>
-                        <a href="{{ url_for('edit_income', id=entry.id) }}"><button class="btn edit">編集</button></a>
+                        <a href="{{ url_for('edit_income', id=entry.id) }}"><button class="btn">編集</button></a>
                         <form action="{{ url_for('delete_income', id=entry.id) }}" method="post" style="display:inline;">
-                            <button class="btn delete" type="submit">削除</button>
+                            <button class="btn" type="submit">削除</button>
                         </form>
                     </div>
                     {% endfor %}
