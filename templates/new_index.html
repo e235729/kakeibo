@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一言多い家計簿アプリ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -130,6 +131,17 @@
             padding: 5px 10px;
             margin-left: 10px;
         }
+        .chart-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -152,6 +164,9 @@
                 <div class="controls">
                     <a href='/new_income'><button class="btn" id="newIncomeBtn">新規収入登録</button></a>
                     <a href='/new_expense'><button class="btn" id="newExpenseBtn">新規支出登録</button></a>
+                </div>
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
             <div class="right-panel">
@@ -184,5 +199,53 @@
             </div>
         </div>
     </div>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['収入', '支出'],
+                datasets: [{
+                    label: '金額',
+                    data: [{{ total_income }}, {{ total_expense }}],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1,
+                    barThickness: 20  // 棒の細さを調整
+                }]
+            },
+            options: {
+                indexAxis: 'y',  // 横向きの棒グラフにする
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            autoSkip: false
+                        },
+                        title: {
+                            display: true,
+                            text: '金額 (円)'  // 横軸のタイトルを「金額 (円)」に設定
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false  // 凡例を非表示にする
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
 </body>
 </html>
