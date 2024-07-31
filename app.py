@@ -21,7 +21,9 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('new_index.html')
+    total_income = db.session.query(db.func.sum(Income.amount)).scalar() or 0
+    total_expense = db.session.query(db.func.sum(Expense.amount)).scalar() or 0
+    return render_template('new_index.html', total_income=total_income, total_expense=total_expense)
 
 @app.route('/new_income', methods=['GET', 'POST'])
 def income():

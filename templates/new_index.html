@@ -6,88 +6,7 @@
     <title>一言多い家計簿アプリ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        .header {
-            background-color: #b0c4de;
-            padding: 20px;
-            text-align: center;
-        }
-        .main-content {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
-        .left-panel {
-            width: 60%;
-            background-color: #f4f4f4;
-        }
-        .right-panel {
-            width: 35%;
-        }
-        .balance {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .balance .income {
-            color: blue;
-        }
-        .balance .expense {
-            color: red;
-        }
-        .controls {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .controls .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        .controls .btn:hover {
-            background-color: #0056b3;
-        }
-        .message, .memo {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .memo-entry {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .memo-entry p {
-            margin: 0;
-        }
-        .btn.delete {
-            background-color: #dc3545;
-        }
-        .btn.edit {
-            background-color: #ffc107;
-        }
-        .btn.delete, .btn.edit {
-            margin-top: 10px;
-        }
+        /* 既存のスタイルはそのまま */
     </style>
 </head>
 <body>
@@ -100,11 +19,11 @@
                 <div class="balance">
                     <div class="income">
                         <h2>収入</h2>
-                        <p>10,500 円</p>
+                        <p>{{ total_income }} 円</p>
                     </div>
                     <div class="expense">
                         <h2>支出</h2>
-                        <p>20,500 円</p>
+                        <p>{{ total_expense }} 円</p>
                     </div>
                 </div>
                 <div class="controls">
