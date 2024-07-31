@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS Transaction (
     amount INTEGER NOT NULL,
     date TEXT NOT NULL,
     memo_id INTEGER,
+    content TEXT,
     message_id INTEGER,
     FOREIGN KEY (memo_id) REFERENCES Memo(memo_id),
     FOREIGN KEY (message_id) REFERENCES Message(message_id)

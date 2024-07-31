@@ -10,11 +10,13 @@ class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
+    memo = db.Column(db.String(50), nullable=False)
 
 class Income(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
+    memo = db.Column(db.String(50), nullable=False)
 
 with app.app_context():
     db.create_all()
@@ -46,7 +48,8 @@ def income():
     if request.method == 'POST':
         date = request.form.get('date')
         amount = request.form.get('amount')
-        new_income = Income(date=date, amount=int(amount))
+        memo = request.form.get('content')
+        new_income = Income(date=date, amount=int(amount),memo = memo)
         db.session.add(new_income)
         db.session.commit()
         return redirect(url_for('index'))
@@ -57,7 +60,8 @@ def expense():
     if request.method == 'POST':
         date = request.form.get('date')
         amount = request.form.get('amount')
-        new_expense = Expense(date=date, amount=int(amount))
+        memo = request.form.get('content')
+        new_expense = Expense(date=date, amount=int(amount), memo = memo)
         db.session.add(new_expense)
         db.session.commit()
         return redirect(url_for('index'))
