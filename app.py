@@ -43,7 +43,19 @@ def index():
         else:
             message = "経済を回してくれてあざーーーーす"  # 収入 == 支出 (その他)
 
-    return render_template('new_index.html', total_income=total_income, total_expense=total_expense, message=message)
+    # すべての収入と支出を取得
+    expenses = Expense.query.all()
+    incomes = Income.query.all()
+
+    return render_template(
+        'new_index.html',
+        total_income=total_income,
+        total_expense=total_expense,
+        message=message,
+        expenses=expenses,
+        incomes=incomes
+    )
+
 
 @app.route('/new_income', methods=['GET', 'POST'])
 def income():

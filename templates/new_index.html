@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         /* 既存のスタイルはそのまま */
+        .memo-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -38,11 +47,17 @@
                 </div>
                 <div class="memo">
                     <h2>メモ</h2>
-                    <div class="memo-entry">
-                        <p>xx月xx日 旅行お土産代で使った</p>
-                        <button class="btn delete">削除</button>
-                        <button class="btn edit">編集</button>
-                    </div>
+                    <!-- メモの表示 -->
+                    {% for entry in expenses %}
+                        <div class="memo-entry">
+                            <p>{{ entry.date }} 支出: {{ entry.amount }} 円 - {{ entry.memo }}</p>
+                        </div>
+                    {% endfor %}
+                    {% for entry in incomes %}
+                        <div class="memo-entry">
+                            <p>{{ entry.date }} 収入: {{ entry.amount }} 円 - {{ entry.memo }}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
