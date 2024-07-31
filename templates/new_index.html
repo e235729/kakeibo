@@ -6,15 +6,118 @@
     <title>一言多い家計簿アプリ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-        /* 既存のスタイルはそのまま */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .header {
+            background-color: #b0c4de;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .left-panel {
+            width: 60%;
+        }
+        .right-panel {
+            width: 35%;
+        }
+        .balance {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .balance h2 {
+            margin: 0;
+            text-align: center;
+        }
+        .income, .expense {
+            margin: 10px 0;
+            text-align: center;
+            padding: 10px;
+        }
+        .income p {
+            color: blue;
+            font-size: 24px;
+            margin: 0;
+        }
+        .expense p {
+            color: red;
+            font-size: 24px;
+            margin: 0;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .controls .btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+        }
+        .controls .btn:hover {
+            background-color: #0056b3;
+        }
+        .message, .memo {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .message h2, .memo h2 {
+            margin-top: 0;
+        }
         .memo-entry {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
+            margin-top: 10px;
             padding: 10px;
+            background-color: #f9f9f9;
             border-radius: 5px;
+        }
+        .memo-entry p {
+            margin: 0;
+            flex-grow: 1;
+        }
+        .btn.delete {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+        .btn.edit {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -42,7 +145,7 @@
             </div>
             <div class="right-panel">
                 <div class="message">
-                    <h2>一言多いメッセージ</h2>
+                    <h2>メッセージ</h2>
                     <p>{{ message }}</p>
                 </div>
                 <div class="memo">
@@ -51,22 +154,21 @@
                     {% for entry in expenses %}
                     <div class="memo-entry">
                         <p>{{ entry.date }} 支出: {{ entry.amount }} 円 - {{ entry.memo }}</p>
-                        <a href="{{ url_for('edit_expense', id=entry.id) }}"><button class="btn">編集</button></a>
+                        <a href="{{ url_for('edit_expense', id=entry.id) }}"><button class="btn edit">編集</button></a>
                         <form action="{{ url_for('delete_expense', id=entry.id) }}" method="post" style="display:inline;">
-                            <button class="btn" type="submit">削除</button>
+                            <button class="btn delete" type="submit">削除</button>
                         </form>
                     </div>
-                {% endfor %}
-                {% for entry in incomes %}
+                    {% endfor %}
+                    {% for entry in incomes %}
                     <div class="memo-entry">
                         <p>{{ entry.date }} 収入: {{ entry.amount }} 円 - {{ entry.memo }}</p>
-                        <a href="{{ url_for('edit_income', id=entry.id) }}"><button class="btn">編集</button></a>
+                        <a href="{{ url_for('edit_income', id=entry.id) }}"><button class="btn edit">編集</button></a>
                         <form action="{{ url_for('delete_income', id=entry.id) }}" method="post" style="display:inline;">
-                            <button class="btn" type="submit">削除</button>
+                            <button class="btn delete" type="submit">削除</button>
                         </form>
                     </div>
-                {% endfor %}
-                
+                    {% endfor %}
                 </div>
             </div>
         </div>
