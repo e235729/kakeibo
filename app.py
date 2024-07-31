@@ -23,7 +23,23 @@ with app.app_context():
 def index():
     total_income = db.session.query(db.func.sum(Income.amount)).scalar() or 0
     total_expense = db.session.query(db.func.sum(Expense.amount)).scalar() or 0
-    return render_template('new_index.html', total_income=total_income, total_expense=total_expense)
+
+    # メッセージの生成
+    if total_income > total_expense: #収入>支出のとき
+        if  total_income >total_expense*2 : 
+            message = "絶好調"#　収入　>　支出の２倍　のとき(絶好調)
+        message = "好調"#支出が収入の50%以上100%未満(好調)
+    elif total_income < total_expense:#収入<支出のとき
+        if total_income < total_expense:#収入の２倍<支出のとき(絶不調)
+            if total_income*2 < total_expense:
+                message = "絶不調"
+            message ="不調"
+    else:
+        if total_income==0 and total_expense==0:
+            message="E"
+        message = "F"
+
+    return render_template('new_index.html', total_income=total_income, total_expense=total_expense, message=message)
 
 @app.route('/new_income', methods=['GET', 'POST'])
 def income():
