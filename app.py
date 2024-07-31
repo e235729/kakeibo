@@ -81,5 +81,45 @@ def expense():
         return redirect(url_for('index'))
     return render_template('new_expense.html')
 
+@app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
+def edit_expense(id):
+    expense = Expense.query.get_or_404(id)
+    if request.method == 'POST':
+        expense.date = request.form.get('date')
+        expense.amount = request.form.get('amount')
+        expense.memo = request.form.get('content')
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('edit_expense.html', expense=expense)
+
+@app.route('/edit_income/<int:id>', methods=['GET', 'POST'])
+def edit_income(id):
+    income = Income.query.get_or_404(id)
+    if request.method == 'POST':
+        income.date = request.form.get('date')
+        income.amount = request.form.get('amount')
+        income.memo = request.form.get('content')
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('edit_income.html', income=income)
+
+@app.route('/delete_expense/<int:id>', methods=['POST'])
+def delete_expense(id):
+    expense = Expense.query.get_or_404(id)
+    db.session.delete(expense)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+@app.route('/delete_income/<int:id>', methods=['POST'])
+def delete_income(id):
+    income = Income.query.get_or_404(id)
+    db.session.delete(income)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
