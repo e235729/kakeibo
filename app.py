@@ -27,19 +27,21 @@ def index():
     total_expense = db.session.query(db.func.sum(Expense.amount)).scalar() or 0
 
     # メッセージの生成
-    if total_income > total_expense: #収入>支出のとき
-        if  total_income >total_expense*2 : 
-            message = "絶好調"#　収入　>　支出の２倍　のとき(絶好調)
-        message = "好調"#支出が収入の50%以上100%未満(好調)
-    elif total_income < total_expense:#収入<支出のとき
-        if total_income < total_expense:#収入の２倍<支出のとき(絶不調)
-            if total_income*2 < total_expense:
-                message = "絶不調"
-            message ="不調"
-    else:
-        if total_income==0 and total_expense==0:
-            message="E"
-        message = "F"
+    if total_income > total_expense:  # 収入 > 支出のとき
+        if total_income > total_expense * 2: 
+            message = "やるやん？ちゃんと貯金してるのは素晴らしいけど、何か趣味や興味を持つのも大事だよ。"  # 収入 > 支出の2倍のとき (絶好調)
+        else:
+            message = "貯金できるって素晴らしいけど、もう少しリスクを取っても良いんじゃないですか？"  # 支出が収入の50%以上100%未満 (好調)
+    elif total_income < total_expense:  # 収入 < 支出のとき
+        if total_income * 2 < total_expense: 
+            message = "なんで貯金できないのか明日までに考えておいてください。そしたら何かが見えてくるはずです。ほなまた明日。"  # 収入の2倍 < 支出のとき (絶不調)
+        else:
+            message = "たかが節約、そう思ってないですか？それやったら、明日も赤字になりますよ？"  # 収入 < 支出のとき (その他)
+    else:  # 収入 == 支出のとき
+        if total_income == 0 and total_expense == 0:
+            message = "つまんない人生"  # 収入も支出もゼロのとき
+        else:
+            message = "経済を回してくれてあざーーーーす"  # 収入 == 支出 (その他)
 
     return render_template('new_index.html', total_income=total_income, total_expense=total_expense, message=message)
 
