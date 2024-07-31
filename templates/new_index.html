@@ -88,7 +88,8 @@
         .message h2, .memo h2 {
             margin-top: 0;
         }
-        .memo-entry {
+        .expence-entry {
+            color: #d94646;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -97,6 +98,16 @@
             background-color: #f9f9f9;
             border-radius: 5px;
         }
+        .income-entry {
+            color: #0039f3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }        
         .memo-entry p {
             margin: 0;
             flex-grow: 1;
@@ -152,7 +163,7 @@
                     <h2>メモ</h2>
                     <!-- メモの表示 -->
                     {% for entry in expenses[-3:] %}
-                    <div class="memo-entry">
+                    <div class="expence-entry">
                         <p>{{ entry.date }} 支出: {{ entry.amount }} 円 - {{ entry.memo }}</p>
                         <a href="{{ url_for('edit_expense', id=entry.id) }}"><button class="btn">編集</button></a>
                         <form action="{{ url_for('delete_expense', id=entry.id) }}" method="post" style="display:inline;">
@@ -161,7 +172,7 @@
                     </div>
                     {% endfor %}
                     {% for entry in incomes[-3:] %}
-                    <div class="memo-entry">
+                    <div class="income-entry">
                         <p>{{ entry.date }} 収入: {{ entry.amount }} 円 - {{ entry.memo }}</p>
                         <a href="{{ url_for('edit_income', id=entry.id) }}"><button class="btn">編集</button></a>
                         <form action="{{ url_for('delete_income', id=entry.id) }}" method="post" style="display:inline;">
